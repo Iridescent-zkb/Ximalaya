@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +39,6 @@ import com.ximalaya.ting.android.opensdk.model.word.HotWord;
 import com.ximalaya.ting.android.opensdk.model.word.QueryResult;
 
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -157,7 +156,7 @@ public class SearchActivity extends BaseActivity implements ISearchCallback {
             public void onClick(View v) {
                 // 调用搜索的接口
                 String keyWord = mInputBox.getText().toString().trim();
-                if (StringUtils.isEmpty(keyWord)) {
+                if (TextUtils.isEmpty(keyWord)) {
                     //可以给个提示
                     Toast.makeText(SearchActivity.this, "搜索关键字不能为空.", Toast.LENGTH_SHORT).show();
                     return;
@@ -176,7 +175,7 @@ public class SearchActivity extends BaseActivity implements ISearchCallback {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (StringUtils.isEmpty(s)) {
+                if (TextUtils.isEmpty(s)) {
                     mSearchPresenter.getHotWords();
                     mDelBtn.setVisibility(View.GONE);
                 } else {
@@ -207,7 +206,7 @@ public class SearchActivity extends BaseActivity implements ISearchCallback {
     }
 
     private void switch2Search(String text) {
-        if (StringUtils.isEmpty(text)) {
+        if (TextUtils.isEmpty(text)) {
             //可以给个提示
             Toast.makeText(this, "搜索关键字不能为空.", Toast.LENGTH_SHORT).show();
             return;

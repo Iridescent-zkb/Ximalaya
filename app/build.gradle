@@ -54,7 +54,7 @@ dependencies {
     //Android界面测试库
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     //提供api调用的库
-    implementation 'org.apache.commons:commons-lang3:3.7'
+    //implementation 'org.apache.commons:commons-lang3:3.7'
     //RecyclerView:设置item布局的控件
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha04'
     //picasso:加载图片
