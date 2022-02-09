@@ -1,5 +1,6 @@
 package com.sunshines.ximalaya.adapters;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.sunshines.ximalaya.R;
 import com.sunshines.ximalaya.utils.LogUtil;
-import com.squareup.picasso.Picasso;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,9 +102,11 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.Inne
             albumDesTv.setText(album.getAlbumIntro());
             albumPlayCountTv.setText(album.getPlayCount() + "");
             albumContentCountTv.setText(album.getIncludeTrackCount() + "");
+
+            String coverUrlLarge = album.getCoverUrlLarge();
             // 对图片结果判空，防止网速太慢没有加载出图片时程序崩溃
-            if (!StringUtils.isEmpty(album.getCoverUrlLarge())) {
-                Picasso.get().load(album.getCoverUrlLarge()).into(albumCoverIv);
+            if (!TextUtils.isEmpty(coverUrlLarge)) {
+                Glide.with(itemView.getContext()).load(coverUrlLarge).into(albumCoverIv);
             }else{
                 // 如果为空，设置默认值
                 albumCoverIv.setImageResource(R.mipmap.ximalay_logo);

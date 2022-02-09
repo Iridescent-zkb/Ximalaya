@@ -262,7 +262,7 @@ public class SearchActivity extends BaseActivity implements ISearchCallback {
                 protected View getEmptyView() {
                     View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_empty_view, this, false);
                     TextView tipsView = emptyView.findViewById(R.id.empty_view_tips_tv);
-                    tipsView.setText("啊嘞嘞~没有搜到喔~");
+                    tipsView.setText("没有搜到喔~");
                     return emptyView;
                 }
             };

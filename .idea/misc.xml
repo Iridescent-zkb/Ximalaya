@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/AndroidProject/Ximalaya/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Android/AndroidProject/Ximalaya/app/src/main/res/layout/search_result_layout.xml" value="0.25364583333333335" />
         <entry key="..\:/Android/AndroidProject/XimalayaTest-master/app/src/main/res/drawable/flow_text_bg.xml" value="0.275" />
         <entry key="..\:/Android/AndroidProject/XimalayaTest-master/app/src/main/res/layout/dialog_confirm_check_box.xml" value="0.25885416666666666" />
         <entry key="..\:/Android/AndroidProject/XimalayaTest-master/app/src/main/res/layout/fragment_empty_view.xml" value="0.25885416666666666" />

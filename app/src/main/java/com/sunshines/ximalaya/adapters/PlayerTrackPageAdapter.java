@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import com.bumptech.glide.Glide;
 import com.sunshines.ximalaya.R;
-import com.squareup.picasso.Picasso;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class PlayerTrackPageAdapter extends PagerAdapter {
         // 设置图片
         Track track = mData.get(position);
         String coverUrlLarge = track.getCoverUrlLarge();
-        Picasso.get().load(coverUrlLarge).into(item);
+        Glide.with(container.getContext()).load(coverUrlLarge).into(item);
         return itemView;
     }
 

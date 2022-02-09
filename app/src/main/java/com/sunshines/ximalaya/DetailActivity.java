@@ -19,6 +19,11 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter;
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.lcodecore.tkrefreshlayout.header.bezierlayout.BezierLayout;
@@ -37,8 +42,6 @@ import com.sunshines.ximalaya.utils.ImageBlur;
 import com.sunshines.ximalaya.utils.LogUtil;
 import com.sunshines.ximalaya.views.RoundRectImageView;
 import com.sunshines.ximalaya.views.UILoader;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.track.Track;
 import com.ximalaya.ting.android.opensdk.player.service.XmPlayListControl;
@@ -294,25 +297,39 @@ public class DetailActivity extends BaseActivity implements IAlbumDetailViewCall
         }
         // 做毛玻璃效果
         if (mLargeCover != null && null != mLargeCover) {
-            Picasso.get().load(album.getCoverUrlLarge()).into(mLargeCover, new Callback() {
-                @Override
-                public void onSuccess() {
-                    Drawable drawable = mLargeCover.getDrawable();
-                    if (drawable != null) {
-                        // 到这里说明有图片了
-                        ImageBlur.makeBlur(mLargeCover, DetailActivity.this);
-                    }
-                }
+//            Picasso.get().load(album.getCoverUrlLarge()).into(mLargeCover, new Callback() {
+//                @Override
+//                public void onSuccess() {
+//                    Drawable drawable = mLargeCover.getDrawable();
+//                    if (drawable != null) {
+//                        // 到这里说明有图片了
+//                        ImageBlur.makeBlur(mLargeCover, DetailActivity.this);
+//                    }
+//                }
+//
+//                @Override
+//                public void onError(Exception e) {
+//                    LogUtil.d(TAG, "onError ...");
+//                }
+//            });
+            Glide.with(this)
+                    .load(album.getCoverUrlLarge())
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            return false;
+                        }
 
-                @Override
-                public void onError(Exception e) {
-                    LogUtil.d(TAG, "onError ...");
-                }
-            });
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            BaseApplication.getHandler().post(() -> ImageBlur.makeBlur(DetailActivity.this, resource, mLargeCover));
+                            return true;
+                        }
+                    }).submit();
         }
 
         if (mSmallCover != null) {
-            Picasso.get().load(album.getCoverUrlLarge()).into(mSmallCover);
+            Glide.with(this).load(album.getCoverUrlLarge()).into(mSmallCover);
         }
     }
 

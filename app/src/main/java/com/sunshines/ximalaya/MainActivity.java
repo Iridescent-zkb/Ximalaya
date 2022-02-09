@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.sunshines.ximalaya.adapters.IndicatorAdapter;
 import com.sunshines.ximalaya.adapters.MainContentAdapter;
 import com.sunshines.ximalaya.interfaces.IPlayerCallback;
@@ -240,7 +240,7 @@ public class MainActivity extends FragmentActivity implements IPlayerCallback {
             }
             LogUtil.d(TAG, "coverUrlMiddle -->" + coverUrlMiddle);
             if (mRoundRectImageView != null) {
-                Picasso.get().load(coverUrlMiddle).into(mRoundRectImageView);
+                Glide.with(this).load(coverUrlMiddle).into(mRoundRectImageView);
             }
         }
     }
